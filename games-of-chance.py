@@ -42,12 +42,28 @@ def cho_han():
         even_odd = 'odd'
     
     if user_call == even_odd:
-        print('You are correct! The roll was: ' + even_odd)
+        print('You are correct! The roll was: ' + even_odd + '!')
         return True
     else:
-        print('You are incorrect! The roll was: ' + even_odd)
+        print('You are incorrect! The roll was: ' + even_odd + '!')
         return False
-    
+
+def high_card():
+    user_one_card = random.randint(1, 13)
+    user_two_card = random.randint(1, 13)
+
+
+    if user_one_card > user_two_card:
+        print('You have won with: ' + str(user_one_card) + ' against: ' + str(user_two_card))
+        return True
+    elif user_two_card > user_one_card:
+        print('You have lost with: ' + str(user_one_card) + ' against: ' + str(user_two_card))
+        return False
+    elif user_one_card == user_two_card:
+        print('You have tied! The game will restart.')
+        return high_card()
+        
+
     
 
 
@@ -55,6 +71,7 @@ choice = input("""What game do you want to play?
 ===================
 Coin Flip
 Cho-Han
+High Card
 """).lower()
 bet = int(input("How much do you want to bet?\n"))
 
@@ -70,10 +87,17 @@ elif choice == 'cho-han':
         money += bet
     else:
         money -= bet
+elif choice == 'high card':
+    result = high_card()
+    if result:
+        money += bet
+    else:
+        money -= bet
+
     
 
 
 
-print(money)
+print("You now have $" + str(money))
 
 
